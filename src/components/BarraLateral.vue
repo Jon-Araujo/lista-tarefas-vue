@@ -11,7 +11,7 @@
         <label for="data">Insira o prazo da tarefa:</label>
         <input type="date" id="data">
 
-        <button>Incluir Tarefa</button>
+        <button @click="incluir">Incluir Tarefa</button>
     </form>
 </template>
 
@@ -19,7 +19,17 @@
     import { defineComponent } from 'vue';
     
     export default defineComponent({
-        name: 'BarraLateral'
+        name: 'BarraLateral',
+        emits: ['aoSalvarTarefa'],
+        methods: {
+            incluir() {
+                const titulo = document.querySelector('#titulo');
+                const descricao = document.querySelector('#descricao');
+                let passaLista :String[] = [];
+                passaLista.push([titulo, descricao])
+                this.$emit('aoSalvarTarefa', this.passaLista)
+            }
+        }
     })
 </script>
 
@@ -42,12 +52,12 @@
         input,
         textarea {
             width: 80%;
-            font-size: 1.35rem;
+            font-size: 1.2rem;
         }
         input,
         textarea {
             border-radius: 8px;
-            padding: 0.3rem;
+            padding: 0.5rem;
             margin: 1rem 0 2rem;
             color: $cor-quaternaria;
         }

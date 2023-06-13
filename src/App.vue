@@ -25,6 +25,10 @@ export default defineComponent({
 <style lang="scss">
   @import './style/variaveis.scss';
 
+  body {
+    margin: 0;
+  }
+
   #app {
     background-color: $cor-secundaria;
     font-size: 16px;
