@@ -1,6 +1,6 @@
 <template>
     <section>
-        <CardTarefas v-for="(card, index) in cards" :key="index" :card="card"/>
+        <CardTarefas />
     </section>
 </template>
 
@@ -12,14 +12,15 @@ export default defineComponent({
     name: "ListaTarefas",
     components: {
         CardTarefas
-    },
-    data() {
-        return {
-            cards: []
-        }
-    },
-    methods: {
-        
     }
 })
 </script>
+
+<style lang="scss" scoped>
+    section {
+        display: grid;
+        grid-template-columns: 30% 30% 30%;
+        gap: 5%;
+        justify-content: space-between;
+    }
+</style>

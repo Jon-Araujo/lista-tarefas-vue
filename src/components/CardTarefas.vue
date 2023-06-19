@@ -1,20 +1,20 @@
 <template>
-    <article class="card">
+    <article class="card" v-for="(card, index) in cards" :key="index" :card="card" :style="`opacity: ${opacityCard}`">
         <div>
-            <h3 class="titulo-card">titulo</h3>
+            <h3 class="titulo-card" :style="`text-decoration: ${textDecorationStyle}`">{{ card[0] }}</h3>
             <div>
                 <button class="btn-edita">
-                    <span class="material-symbols-outlined">edit</span>
+                    <span class="material-symbols-outlined" @click="editarTarefa(index)">edit</span>
                 </button>
-                <button class="btn-exclui">X</button>
+                <button class="btn-exclui" @click="excluirTarefa(index)"><span class="material-symbols-outlined">close</span></button>
             </div>
         </div>
-        <p class="descricao-card">Descrição: descrição......</p>
+        <p class="descricao-card" :style="`text-decoration: ${textDecorationStyle}`">Descrição: {{ card[1] }}</p>
         <div>
-            <p class="prazo-card">Prazo: 12/12/2012</p>
-            <p class="prioridade-card">Prioridade: Tranquila</p>
+            <p class="prazo-card" :style="`text-decoration: ${textDecorationStyle}`">Prazo: {{ card[2] }}</p>
+            <p class="prioridade-card" :style="`text-decoration: ${textDecorationStyle}`">Prioridade: Tranquila</p>
         </div>
-        <button class="btn-realizada">Tarefa realizada<span class="material-symbols-outlined">check_circle</span></button>
+        <button class="btn-realizada" @click="concluirTarefa(card, index)">Tarefa realizada<span class="material-symbols-outlined">check_circle</span></button>
     </article>
 </template>
 
@@ -22,7 +22,35 @@
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-    name: 'CardTarefas'
+    name: 'CardTarefas',
+    data() {
+        return {
+            cards: JSON.parse(localStorage.getItem('cards') || '{}'),
+            textDecorationStyle: "none",
+            opacityCard: "1"
+        }
+    },
+    methods: {
+        excluirTarefa(index :number) {
+            this.cards.splice(index, 1);
+            localStorage.cards = JSON.stringify(this.cards);
+        },
+
+        editarTarefa(index :number) {
+            alert("aguardando função editar");
+
+        },
+
+        concluirTarefa(card :any, index :number) {
+            if (this.textDecorationStyle === "none") {
+                this.textDecorationStyle = "line-through"
+                this.opacityCard = "0.8"
+            } else {
+                this.textDecorationStyle = "none"
+                this.opacityCard = "1"
+            }
+        }
+    }
 })
 </script>
 
@@ -32,13 +60,15 @@ export default defineComponent({
         border: 5px solid $cor-terciaria;
         background-color: $cor-primaria;
         border-radius: 20px;
-        width: 25%;
+        width: auto;
         padding: 0 1rem 1rem 1rem;
         color: $cor-quaternaria;
         div {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            max-height: 20%;
+            margin-top: 0.5rem;
             .titulo-card {
                 font-size: 1.3rem;
                 font-weight: 900;
@@ -69,7 +99,7 @@ export default defineComponent({
                 border-radius: 40%;
                 height: 100%;
                 width: 45%;
-                padding: 0.6rem;
+                padding: 0.3rem;
                 color: $cor-primaria;
                 background-color: $cor-quaternaria;
                 border: none;
@@ -84,13 +114,18 @@ export default defineComponent({
         }
         .descricao-card {
             font-size: 1.1rem;
+            height: 30%;
         }
-        .prazo-card,
-        .prioridade-card {
+        .prazo-card {
+            width: 70%;
             font-size: 0.8rem;
-            width: 45%;
+        }
+        .prioridade-card {
+            width: 30%; 
+            font-size: 0.8rem;
         }
         .btn-realizada {
+            margin-top: 0.5rem;
             display: flex;
             align-items: center;
             width: 100%;
