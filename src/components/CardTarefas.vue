@@ -23,9 +23,9 @@
             <p class="prazo-card">Prazo: {{ card[2] }}</p>
             <p class="prioridade-card">Prioridade: Tranquila</p>
         </div>
-        <button v-if="card[3] === 'realizada'" class="btn-realizada" @click="concluirTarefa(card, index)" :style="`background-color: ${bgColor}`">Tarefa realizada<span
+        <button v-if="card[3] === 'realizada'" class="btn-realizada" @click="concluirTarefa(index)" :style="`background-color: ${bgColor}`">Tarefa realizada<span
                 class="material-symbols-outlined">check_circle</span></button>
-        <button v-else class="btn-realizada" @click="concluirTarefa(card, index)">Tarefa realizada<span
+        <button v-else class="btn-realizada" @click="concluirTarefa(index)">Tarefa realizada<span
                 class="material-symbols-outlined">check_circle</span></button>
     </article>
 </template>
@@ -39,8 +39,6 @@ export default defineComponent({
         return {
             cards: JSON.parse(localStorage.getItem('cards') || '{}'),
             textDecorationStyle: "line-through",
-            opacity: "0.6",
-            opacityNo: "1",
             bgColor: "#00A000;"
         }
     },
@@ -53,9 +51,10 @@ export default defineComponent({
         editarTarefa(index: number) {
             alert("aguardando função editar");
 
+
         },
 
-        concluirTarefa(card: any, index: number) {
+        concluirTarefa(index: number) {
             const lista = JSON.parse(localStorage.cards)
             if (lista[index].length === 3) {
                 this.cards[index].push("realizada");
@@ -79,7 +78,7 @@ export default defineComponent({
     width: auto;
     padding: 0 1rem 1rem 1rem;
     color: $cor-quaternaria;
-    height: 100%;
+    height: auto;
 
     div {
         display: flex;
@@ -152,7 +151,7 @@ export default defineComponent({
     }
 
     .btn-realizada {
-        margin-top: 0.5rem;
+        margin: 0.5rem 0 2rem 0;
         display: flex;
         align-items: center;
         width: 100%;

@@ -52,7 +52,8 @@ form {
     text-align: center;
     background-color: $cor-terciaria;
     color: $cor-primaria;
-    height: 100vh;
+    min-height: 100vh;
+    width: 100%;
 
     h1 {
         margin: 3rem 0;

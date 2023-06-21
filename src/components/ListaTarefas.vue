@@ -19,8 +19,9 @@ export default defineComponent({
 <style lang="scss" scoped>
     section {
         display: grid;
-        grid-template-columns: 30% 30% 30%;
+        grid-template-columns: 20% 20% 20% 20%;
         gap: 5%;
         justify-content: space-between;
+        height: auto;
     }
 </style>
