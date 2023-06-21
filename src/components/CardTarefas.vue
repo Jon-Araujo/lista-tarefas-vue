@@ -6,7 +6,7 @@
             <h3 v-else class="titulo-card">{{ card[0] }}</h3>
             <div>
                 <button class="btn-edita">
-                    <span class="material-symbols-outlined" @click="editarTarefa(index)">edit</span>
+                    <span class="material-symbols-outlined" @click="editarTarefa">edit</span>
                 </button>
                 <button class="btn-exclui" @click="excluirTarefa(index)"><span
                         class="material-symbols-outlined">close</span></button>
@@ -35,11 +35,13 @@ import { defineComponent } from 'vue';
 
 export default defineComponent({
     name: 'CardTarefas',
+    emits: ['editarCard'],
     data() {
         return {
             cards: JSON.parse(localStorage.getItem('cards') || '{}'),
             textDecorationStyle: "line-through",
-            bgColor: "#00A000;"
+            bgColor: "#00A000;",
+            editandoCard: false
         }
     },
     methods: {
@@ -48,10 +50,8 @@ export default defineComponent({
             localStorage.cards = JSON.stringify(this.cards);
         },
 
-        editarTarefa(index: number) {
-            alert("aguardando função editar");
-
-
+        editarTarefa() {
+            this.$emit('editarCard', !this.editandoCard);
         },
 
         concluirTarefa(index: number) {
@@ -79,6 +79,7 @@ export default defineComponent({
     padding: 0 1rem 1rem 1rem;
     color: $cor-quaternaria;
     height: auto;
+    margin-top: 15%;
 
     div {
         display: flex;

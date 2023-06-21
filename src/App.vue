@@ -68,14 +68,15 @@ body {
 }
 
 .principal {
-display: flex;
+  display: flex;
+  height: auto;
   aside {
     width: 40%;
   }
 
   main {
     width: 100%;
-    padding: 2% 5%;
+    padding: 0 5% 2%;
     min-height: 100vh;
   }
 }

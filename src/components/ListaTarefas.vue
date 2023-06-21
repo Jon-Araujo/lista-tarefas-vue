@@ -20,7 +20,6 @@ export default defineComponent({
     section {
         display: grid;
         grid-template-columns: 20% 20% 20% 20%;
-        gap: 5%;
         justify-content: space-between;
         height: auto;
     }
