@@ -41,6 +41,15 @@ export default defineComponent({
         },
         confirmaEdicao(i :number) {
             let lista = JSON.parse(localStorage.getItem('cards') || '{}');
+            if (this.titulo == ""){
+                this.titulo = lista[i][0];
+            }
+            if (this.descricao == "") {
+                this.descricao = lista[i][1];
+            }
+            if (this.prazo == "") {
+                this.prazo = lista[i][2];
+            }
             lista[i][0] = this.titulo;
             lista[i][1] = this.descricao;
             lista[i][2] = this.prazo;
@@ -87,7 +96,12 @@ export default defineComponent({
         }
 
         #titulo {
-            padding: 0.3rem;
+            padding: 0.2rem;
+            margin-left: 0.3rem;
+            width: 100%;
+            border: 1px solid $cor-secundaria;
+            border-radius: 8px;
+            background-color: $cor-primaria;
             &::placeholder {
                 font-size: 1.1rem;
                 color: $cor-quaternaria;
@@ -98,10 +112,14 @@ export default defineComponent({
     form {
         height: 100%;
         #descricao {
-            width: 100%;
+            width: 95%;
             margin: 0.5rem 0;
-            padding: 0.3rem;
+            padding: 0.2rem;
             font-size: 0.9rem;
+            height: 7rem;
+            border: 1px solid $cor-secundaria;
+            border-radius: 8px;
+            background-color: $cor-primaria;
             &::placeholder {
                 color: $cor-quaternaria;
             }
@@ -110,6 +128,11 @@ export default defineComponent({
         #data {
             margin-left: 0.3rem;
             color: $cor-quaternaria;
+            padding: 0.2rem;
+            margin-left: 0.3rem;
+            border: 1px solid $cor-secundaria;
+            border-radius: 8px;
+            background-color: $cor-primaria;
         }
 
         button {
