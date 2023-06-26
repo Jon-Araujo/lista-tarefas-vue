@@ -10,7 +10,7 @@
 
             <label for="data">Prazo:</label>
             <input type="date" id="data" v-model="prazo" :placeholder="prazoCard">
-            <button @click="confirmaEdicao">Confirmar</button>
+            <button @click="confirmaEdicao(index)">Confirmar</button>
         </form>
     </div>
 </template>
@@ -39,8 +39,12 @@ export default defineComponent({
         retorna() {
             this.$emit('retornaEdicao');
         },
-        confirmaEdicao() {
-            console.log("confirma edição");
+        confirmaEdicao(i :number) {
+            let lista = JSON.parse(localStorage.getItem('cards') || '{}');
+            lista[i][0] = this.titulo;
+            lista[i][1] = this.descricao;
+            lista[i][2] = this.prazo;
+            localStorage.cards = JSON.stringify(lista);            
         }
 
     }
@@ -53,7 +57,7 @@ export default defineComponent({
 .conteudo {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: auto;
     justify-content: space-between;
 
     div {
@@ -83,20 +87,29 @@ export default defineComponent({
         }
 
         #titulo {
-            padding: 0.3rem
+            padding: 0.3rem;
+            &::placeholder {
+                font-size: 1.1rem;
+                color: $cor-quaternaria;
+            }
         }
     }
 
     form {
+        height: 100%;
         #descricao {
             width: 100%;
             margin: 0.5rem 0;
-            height: 45%;
-            padding: 0.3rem
+            padding: 0.3rem;
+            font-size: 0.9rem;
+            &::placeholder {
+                color: $cor-quaternaria;
+            }
         }
 
         #data {
             margin-left: 0.3rem;
+            color: $cor-quaternaria;
         }
 
         button {
