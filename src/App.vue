@@ -2,10 +2,10 @@
   <HeaderPagina @abrirBarra="abrirBarra" />
 
   <div class="principal">
-    <aside v-if="mostrarBarra !== true" :style="`display: ${displayNone}`" >
+    <aside v-if="mostrarBarra !== true" :style="`display: ${displayNone}`">
       <BarraLateral />
     </aside>
-    <aside v-else :style="`display: ${displayFlex}`" >
+    <aside v-else :style="`display: ${displayFlex}`">
       <BarraLateral />
     </aside>
 
@@ -36,7 +36,8 @@ export default defineComponent({
     return {
       mostrarBarra: false,
       displayFlex: "flex",
-      displayNone: "none"
+      displayNone: "none",
+      editandoCard: false
     }
   },
   methods: {
@@ -70,6 +71,7 @@ body {
 .principal {
   display: flex;
   height: auto;
+
   aside {
     width: 40%;
   }

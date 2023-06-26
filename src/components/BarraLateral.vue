@@ -35,7 +35,7 @@ export default defineComponent({
             } else {
                 listaCards = [];
             }
-            listaCards.push([this.titulo, this.descricao, this.prazo]);
+            listaCards.push([this.titulo, this.descricao, this.prazo, listaCards.length + 1]);
             localStorage.cards = JSON.stringify(listaCards);
         }
     }
