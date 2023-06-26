@@ -1,15 +1,15 @@
 <template>
-    <div @editaCard="verificaCard" class="conteudo">
+    <div class="conteudo">
         <div>
             <button @click="retorna"><span class="material-symbols-outlined">undo</span></button>
-            <input type="text" id="titulo" v-model="titulo" :placeholder="titulo">
+            <input type="text" id="titulo" v-model="titulo" :placeholder="tituloCard">
         </div>
         <form>
             <label for="descricao">Descrição:</label>
-            <textarea type="text" id="descricao" v-model="descricao"></textarea>
+            <textarea type="text" id="descricao" v-model="descricao" :placeholder="descricaoCard"></textarea>
 
             <label for="data">Prazo:</label>
-            <input type="date" id="data" v-model="prazo">
+            <input type="date" id="data" v-model="prazo" :placeholder="prazoCard">
             <button @click="confirmaEdicao">Confirmar</button>
         </form>
     </div>
@@ -21,28 +21,23 @@ import { defineComponent } from 'vue';
 export default defineComponent({
     name: 'EditaTarefa',
     emits: ['retornaEdicao'],
+    props: {
+        id: Number,
+        index: Number,
+        tituloCard: String,
+        descricaoCard: String,
+        prazoCard: String
+    },
     data() {
         return {
             titulo: "",
             descricao: "",
-            prazo: "",
-            idCard: 0
+            prazo: ""
         }
     },
     methods: {
         retorna() {
-            this.$emit('retornaEdicao')
-        },
-        verificaCard(id: number, index: number) {
-            let lista = JSON.parse(localStorage.getItem('cards') || '{}')
-            alert(id);
-            alert(index)
-
-            this.idCard = id;
-
-            this.titulo = lista[index][0];
-            this.descricao = lista[index][1];
-            this.prazo = lista[index][2]
+            this.$emit('retornaEdicao');
         },
         confirmaEdicao() {
             console.log("confirma edição");

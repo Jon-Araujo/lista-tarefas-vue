@@ -32,7 +32,7 @@
         </span>
 
         <span v-else>
-            <EditaTarefa @retornaEdicao="contadorId = 0"/>
+            <EditaTarefa @retornaEdicao="contadorId = 0"  v-bind="{id: card[3], index: index, tituloCard: card[0], descricaoCard: card[1], prazoCard: card[2]}" />
         </span>
     </article>
 </template>
@@ -43,7 +43,7 @@ import EditaTarefa from './EditaTarefa.vue'
 
 export default defineComponent({
     name: 'CardTarefas',
-    emits: ['editaCard'],
+    // emits: ['editaCard'],
     components: {
         EditaTarefa
     },
@@ -63,7 +63,7 @@ export default defineComponent({
 
         editarTarefa(id :number, index :number) {
             this.contadorId = id;
-            this.$emit('editaCard', id, index);
+            // this.$emit('editaCard', id, index);
         },
 
         concluirTarefa(index: number) {
