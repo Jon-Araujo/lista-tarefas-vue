@@ -25,7 +25,7 @@ export default defineComponent({
         return {
             titulo: "",
             descricao: "",
-            prazo: "",
+            prazo: ""
         }
     },
     methods: {
@@ -35,7 +35,43 @@ export default defineComponent({
             } else {
                 listaCards = [];
             }
-            listaCards.push([this.titulo, this.descricao, this.prazo, listaCards.length + 1]);
+
+            let prioridade = "";
+
+            const dataAtual = new Date();
+            const dataHoje: number = dataAtual.getDate();
+            const mesAtual: number = dataAtual.getMonth() + 1;
+            const anoAtual: number = dataAtual.getFullYear();
+
+            const dataPrazo = Number(this.prazo.slice(8));
+            const mesPrazo = Number(this.prazo.slice(5, 7));
+            const anoPrazo = Number(this.prazo.slice(0, 4));
+
+            if (anoPrazo > anoAtual) {
+                prioridade = "Em tempo";
+            } else if (anoPrazo === anoAtual) {
+                if (mesPrazo > mesAtual) {
+                    prioridade = "Em tempo";
+                } else if (mesPrazo === mesAtual) {
+                    if (dataPrazo - dataHoje <= 3) {
+                        prioridade = "Urgentíssimo";
+                    } else if (dataPrazo - dataHoje <= 6) {
+                        prioridade = "Urgente";
+                    } else if (dataPrazo - dataHoje <= 12) {
+                        prioridade = "Moderado";
+                    } else {
+                        prioridade = "Em tempo";
+                    }
+                } else if (mesPrazo < mesAtual) {
+                    alert("Mês informado é anterior ao mês vigente.");
+                    prioridade = "Erro!";
+                }
+            } else if (anoPrazo < anoAtual) {
+                alert("Ano informado é anterior ao ano vigente.");
+                prioridade = "Erro!";
+            }
+
+            listaCards.push([this.titulo, this.descricao, this.prazo, listaCards.length + 1, prioridade]);
             localStorage.cards = JSON.stringify(listaCards);
         }
     }
@@ -83,4 +119,5 @@ form {
         border: none;
         border-radius: 8px;
     }
-}</style>
+}
+</style>

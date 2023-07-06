@@ -32,16 +32,17 @@ export default defineComponent({
         return {
             titulo: "",
             descricao: "",
-            prazo: ""
+            prazo: "",
+            prioridade: ""
         }
     },
     methods: {
         retorna() {
             this.$emit('retornaEdicao');
         },
-        confirmaEdicao(i :number) {
+        confirmaEdicao(i: number) {
             let lista = JSON.parse(localStorage.getItem('cards') || '{}');
-            if (this.titulo == ""){
+            if (this.titulo == "") {
                 this.titulo = lista[i][0];
             }
             if (this.descricao == "") {
@@ -49,11 +50,45 @@ export default defineComponent({
             }
             if (this.prazo == "") {
                 this.prazo = lista[i][2];
+            } else {
+                const dataAtual = new Date();
+                const dataHoje: number = dataAtual.getDate();
+                const mesAtual: number = dataAtual.getMonth() + 1;
+                const anoAtual: number = dataAtual.getFullYear();
+
+                const dataPrazo = Number(this.prazo.slice(8));
+                const mesPrazo = Number(this.prazo.slice(5, 7));
+                const anoPrazo = Number(this.prazo.slice(0, 4));
+
+                if (anoPrazo > anoAtual) {
+                    this.prioridade = "Em tempo";
+                } else if (anoPrazo === anoAtual) {
+                    if (mesPrazo > mesAtual) {
+                        this.prioridade = "Em tempo";
+                    } else if (mesPrazo === mesAtual) {
+                        if (dataPrazo - dataHoje <= 3) {
+                            this.prioridade = "Urgentíssimo";
+                        } else if (dataPrazo - dataHoje <= 6) {
+                            this.prioridade = "Urgente";
+                        } else if (dataPrazo - dataHoje <= 12) {
+                            this.prioridade = "Moderado";
+                        } else {
+                            this.prioridade = "Em tempo";
+                        }
+                    } else if (mesPrazo < mesAtual) {
+                        alert("Mês informado é anterior ao mês vigente.");
+                        this.prioridade = "Erro!";
+                    }
+                } else if (anoPrazo < anoAtual) {
+                    alert("Ano informado é anterior ao ano vigente.");
+                    this.prioridade = "Erro!";
+                }
             }
             lista[i][0] = this.titulo;
             lista[i][1] = this.descricao;
             lista[i][2] = this.prazo;
-            localStorage.cards = JSON.stringify(lista);            
+            lista[i][4] = this.prioridade;
+            localStorage.cards = JSON.stringify(lista);
         }
 
     }
@@ -102,6 +137,7 @@ export default defineComponent({
             border: 1px solid $cor-secundaria;
             border-radius: 8px;
             background-color: $cor-primaria;
+
             &::placeholder {
                 font-size: 1.1rem;
                 color: $cor-quaternaria;
@@ -111,6 +147,7 @@ export default defineComponent({
 
     form {
         height: 100%;
+
         #descricao {
             width: 95%;
             margin: 0.5rem 0;
@@ -120,6 +157,7 @@ export default defineComponent({
             border: 1px solid $cor-secundaria;
             border-radius: 8px;
             background-color: $cor-primaria;
+
             &::placeholder {
                 color: $cor-quaternaria;
             }
