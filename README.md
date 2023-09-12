@@ -13,7 +13,7 @@ foi instalado com sucesso.
 
 ### 🔧 Instalação
 
-Você precisará realizar os seguintes passos para iniciar o projeto:
+Você precisará realizar os seguintes passos para instalar o pacote de gerenciamento:
 ```
 npm install
 ```
@@ -28,24 +28,21 @@ Entretanto, se o intuíto for rodar a aplicação diretamente do computador atra
 npm run serve
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Veja mais [Configuração Vue.Js](https://cli.vuejs.org/config/).
 
 
 ## 🛠️ Construído com
-
-Mencione as ferramentas que você usou para criar seu projeto
 
 * [Vue.js](https://vuejs.org/) - Framework JavaScript utilizado
 * [SASS](https://sass-lang.com/) - Pré-Processador CSS3
 * [TypeScript](https://www.typescriptlang.org/) - Linguagem de Programação (extensão do JS)
 
 
-## ✒️ Autores
+## ✒️ Autor
 
 * **Jonathan da Silva Araujo - 202205178111** - *Projeto completo* - [Jonathan](https://github.com/Jon-Araujo)
 
 ## 🎁 Expressões de gratidão
 
-* Gostaria de agradecer à Universidade Estácio de Sá por propor um trabalho que realmente me desafiou e que me proporcionou colocar os ensinamentos que obtive em uma aplicação, a qual agrega real valor em situações de organização. Pude perceber, graças a isto, que realmente evoluí nessa caminhada e que poosso e irei muito além! 🫂.
+* Gostaria de agradecer à Universidade Estácio de Sá por propor um trabalho que realmente me desafiou e que me proporcionou empregar os ensinamentos que obtive na confecção de uma aplicação, a qual agrega real valor em situações de organização. Pude perceber, graças a isto, que realmente evoluí nesta caminhada e que posso e irei muito além! 🫂.
 ---
